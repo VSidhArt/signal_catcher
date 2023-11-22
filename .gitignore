@@ -38,6 +38,6 @@ Gemfile.local
 *.gem
 
 tmp/
-.rbnext/
+vendor/
 
 gemfiles/*.lock

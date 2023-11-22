@@ -1,3 +1,5 @@
+[![Build](https://github.com/VSidhArt/signal_catcher/workflows/Build/badge.svg)](https://github.com/VSidhArt/signal_catcher/actions)
+
 # SignalCatcher
 
 ## Overview
