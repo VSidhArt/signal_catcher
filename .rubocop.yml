@@ -1,0 +1,93 @@
+require:
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  SuggestExtensions: false
+  NewCops: enable
+  Exclude:
+    - '**/*.gemspec'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: nested
+
+Style/TrivialAccessors:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/SingleLineMethods:
+  AllowIfMethodIsEmpty: true
+
+Layout/EmptyLineBetweenDefs:
+  AllowAdjacentOneLineDefs: true
+
+Layout/LineLength:
+  Max: 120
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/IndentationStyle:
+  EnforcedStyle: spaces
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Style/AsciiComments:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 120
+
+Metrics/BlockLength:
+  CountComments: false
+  Max: 25
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/AbcSize:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+RSpec/ImplicitSubject:
+  EnforcedStyle: single_statement_only
+
+RSpec/MultipleExpectations:
+  Max: 8
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/NamedSubject:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never # support ruby 2.7
+
+RSpec/VerifiedDoubles:
+  Enabled: false
