@@ -9,6 +9,7 @@ AllCops:
     - '**/*.gemspec'
     - 'vendor/**/*'
     - 'tmp/**/*'
+    - 'ta-lib/ta-lib.spec'
 
 Style/StringLiterals:
   Enabled: true

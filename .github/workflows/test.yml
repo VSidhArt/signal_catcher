@@ -1,0 +1,40 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby-version: ['3.0']
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+
+    - name: Install TA-Lib
+      run: |
+        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+        tar xzvf ta-lib-0.4.0-src.tar.gz
+        cd ta-lib
+        ./configure --prefix=/usr
+        make
+        sudo make install
+
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle config set --local path 'vendor/ruby'
+        bundle install -j $(nproc)
+
+    - name: Run tests with RSpec
+      run: bundle exec rspec
+
+    - name: Run linting with RuboCop
+      run: bundle exec rubocop

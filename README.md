@@ -1,3 +1,5 @@
+[![Ruby](https://github.com/VSidhArt/signal_catcher/workflows/Ruby/badge.svg)](https://github.com/VSidhArt/signal_catcher/actions)
+
 # SignalCatcher
 
 ## Overview
