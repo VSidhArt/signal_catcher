@@ -55,7 +55,7 @@ module SignalCatcher
       # @return [Hash] transformed moving average parameters
       def transform_ma_params(time_period_key)
         indicator_params
-          .except(:time_period_first, :time_period_second)
+          .reject { |k, _| %i[time_period_first time_period_second].include?(k) }
           .merge(time_period: indicator_params[time_period_key])
       end
 
