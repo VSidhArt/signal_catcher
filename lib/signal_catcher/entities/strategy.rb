@@ -15,7 +15,7 @@ module SignalCatcher
         raw_strategies.map do |strategy|
           new(
             indicator_type: strategy[:indicator_type],
-            indicator_params: strategy[:indicator_params],
+            indicator_params: adapt_indicator_params(strategy[:indicator_type], strategy[:indicator_params]),
             signal_params: adapt_signal_params(strategy[:signal_params]),
             strategy_hash: strategy[:strategy_hash]
           )
@@ -28,7 +28,15 @@ module SignalCatcher
       def self.adapt_signal_params(signal_params)
         SignalCatcher::Adapters::SignalParamsAdapter.call(signal_params)
       end
-      private_class_method :adapt_signal_params
+
+      # Retrieves indicators for the strategy.
+      # @param indicator_type [String] the type of the indicator
+      # @param indicator_params [Hash] oroginal parameters for the indicator
+      # @return [Hash] a hash of indicators and their parameters
+      def self.adapt_indicator_params(indicator_type, indicator_params)
+        SignalCatcher::Adapters::IndicatorsAdapter.new(indicator_type, indicator_params).call
+      end
+      private_class_method :adapt_signal_params, :adapt_indicator_params
 
       # @param indicator_type [String] the type of the indicator
       # @param indicator_params [Hash] parameters for the indicator
@@ -44,7 +52,7 @@ module SignalCatcher
       # Calculates indicators for a collection of klines.
       # @param klines [Array<SignalCatcher::Entities::Kline>] an array of kline data
       def calculate_indicators!(klines)
-        adapted_indicators.each do |indicator_key, params|
+        indicator_params.each do |indicator_key, params|
           next if klines.first.indicator_result(indicator_key)
 
           SignalCatcher::Indicators::IndicatorFactory.create(
@@ -58,22 +66,14 @@ module SignalCatcher
 
       # Checks signals for a collection of klines.
       # @param klines [Array<SignalCatcher::Entities::Kline>] an array of kline data
-      def check_signals(klines)
+      def check_signals!(klines)
         SignalCatcher::Signals::SignalFactory.create(
           indicator_type,
           klines: klines,
           signal_params: signal_params,
           strategy_hash: strategy_hash,
-          indicator_keys: adapted_indicators.keys
+          indicator_keys: indicator_params.keys
         ).check!
-      end
-
-      private
-
-      # Retrieves indicators for the strategy.
-      # @return [Hash] a hash of indicators and their parameters
-      def adapted_indicators
-        @adapted_indicators ||= SignalCatcher::Adapters::IndicatorsAdapter.new(indicator_type, indicator_params).call
       end
     end
   end

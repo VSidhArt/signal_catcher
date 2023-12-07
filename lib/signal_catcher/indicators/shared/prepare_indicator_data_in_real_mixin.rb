@@ -7,7 +7,7 @@ module SignalCatcher
         private
 
         def prepare_input
-          @indicator.in_real(0, prepare_klines_data_in_real)
+          indicator.in_real(0, prepare_klines_data_in_real)
         end
 
         # Prepares the kline data in real number format.

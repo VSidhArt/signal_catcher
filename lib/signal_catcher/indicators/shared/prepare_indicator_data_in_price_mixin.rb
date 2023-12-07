@@ -4,10 +4,12 @@ module SignalCatcher
   module Indicators
     module Shared
       module PrepareIndicatorDataInPriceMixin
+        # Module prepare price data in price for use in ta-lib library
+
         private
 
         def prepare_input
-          @indicator.in_price(*prepare_klines_data_in_price)
+          indicator.in_price(*prepare_klines_data_in_price)
         end
 
         # Prepares the kline data for price based indicators.

@@ -25,7 +25,7 @@ module SignalCatcher
         c_function.opt_int(0, time_period)
         c_function.opt_real(1, deviations_up)
         c_function.opt_real(2, deviations_down)
-        c_function.opt_int(3, ma_types_map(ma_type))
+        c_function.opt_int(3, find_ma_klass(ma_type))
       end
 
       # The number of output arrays (upper_band, middle_band, lower_band) for Bollinger Bands.

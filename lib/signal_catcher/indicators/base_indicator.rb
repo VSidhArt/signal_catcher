@@ -9,7 +9,7 @@ module SignalCatcher
 
       include SignalCatcher::Utils::Configurable
 
-      attr_reader :klines
+      attr_reader :klines, :indicator
 
       # Initializes the BaseIndicator with klines, indicator parameters, and an indicator key.
       # @param klines [Array] The klines data.

@@ -52,6 +52,10 @@ Output example:
 ...
 ```
 
+## Specs
+All indicators specs use indicators data downloaded with Trading View, the results may vary slightly, for this you can use permissible_measurement_error in the tests, but be careful - a large deviation can affect your trading strategy.
+
+
 ## Troubleshooting
 
 1. In case of problems with `bundle install` like
@@ -89,3 +93,7 @@ sudo env ARCHFLAGS="-arch arm64" gem install talib_ruby -- --with-talib-include=
 ```
 
 This fix is for MACOS with a silicon chip. In case of using another architecture change `-arch arm64` to `-arch x86_64'.
+
+## TODO
+- Write docs for indicators and signals formats
+- Add concurrent calculations to `Processor`

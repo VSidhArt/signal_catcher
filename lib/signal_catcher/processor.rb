@@ -16,7 +16,7 @@ module SignalCatcher
     def call
       strategies
         .each { |strategy| strategy.calculate_indicators!(klines) }
-        .each { |strategy| strategy.check_signals(klines) }
+        .each { |strategy| strategy.check_signals!(klines) }
 
       klines
     end

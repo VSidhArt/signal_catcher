@@ -24,9 +24,9 @@ module SignalCatcher
       def configure_indicator_parameters(c_function)
         c_function.opt_int(0, fast_k_period)
         c_function.opt_int(1, slow_k_period)
-        c_function.opt_int(2, ma_types_map(slow_k_ma))
+        c_function.opt_int(2, find_ma_klass(slow_k_ma))
         c_function.opt_int(3, slow_d_period)
-        c_function.opt_int(4, ma_types_map(slow_d_ma))
+        c_function.opt_int(4, find_ma_klass(slow_d_ma))
       end
 
       # The number of output arrays for Stochastic (out_slow_k, out_slow_d).
